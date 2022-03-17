@@ -2,35 +2,50 @@ package com.furkanbalci.mesat.models.user;
 
 import androidx.annotation.NonNull;
 
+import com.furkanbalci.mesat.database.object.DatabaseObject;
+
 import java.util.Objects;
-import java.util.UUID;
 
 /**
  * User class.
  */
-public final class User {
+public final class User implements DatabaseObject {
 
-    private final UUID uid;
-    private String name;
-    private String surname;
+    private final long cachingDate;
+    private final int id;
+    private final String name;
+    private final String surname;
 
     /**
      * User creator.
      *
-     * @param uid UUID.
+     * @param id      Id.
+     * @param name    Name.
+     * @param surname Surname.
      */
-    public User(@NonNull UUID uid) {
-        this.uid = Objects.requireNonNull(uid);
+    public User(int id, @NonNull String name, @NonNull String surname) {
+        this.id = id;
+        this.name = Objects.requireNonNull(name);
+        this.surname = Objects.requireNonNull(surname);
+        this.cachingDate = System.currentTimeMillis();
+    }
+
+    /**
+     * Gets caching date.
+     *
+     * @return Gets caching date.
+     */
+    public long getCachingDate() {
+        return this.cachingDate;
     }
 
     /**
      * Gets uuid of user.
      *
-     * @return UUID.
+     * @return Id.
      */
-    @NonNull
-    public UUID getUID() {
-        return this.uid;
+    public int getID() {
+        return this.id;
     }
 
     /**
@@ -43,16 +58,8 @@ public final class User {
     }
 
     /**
-     * Sets name of user.
-     *
-     * @param name User name.
-     */
-    public void setName(@NonNull String name) {
-        this.name = Objects.requireNonNull(name);
-    }
-
-    /**
      * Gets surname of user.
+     *
      * @return User surname.
      */
     @NonNull
@@ -60,11 +67,18 @@ public final class User {
         return this.surname;
     }
 
-    /**
-     * Sets surname of user.
-     * @param surname User surname.
-     */
-    public void setSurname(@NonNull String surname) {
-        this.surname = Objects.requireNonNull(surname);
+    @Override
+    public String toInsertQuery() {
+        return "INSERT INTO"; //TODO:YAPILACAK
+    }
+
+    @Override
+    public String toUpdateQuery() {
+        return "UPDATE"; //TODO:YAPILACAK
+    }
+
+    @Override
+    public String toDeleteQuery() {
+        return "DELETE"; //TODO:YAPILACAK
     }
 }
