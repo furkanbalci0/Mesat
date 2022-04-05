@@ -1,0 +1,117 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/background_color"
+    tools:context=".ui.SupportActivity">
+
+    <Button
+        android:id="@+id/support_activity_send_button"
+        android:layout_width="144dp"
+        android:layout_height="61dp"
+        android:layout_marginTop="8dp"
+        android:backgroundTint="#066B93"
+        android:fontFamily="@font/abhaya_libre"
+        android:letterSpacing="-0.01"
+        android:text="Gönder"
+        android:textSize="24sp"
+        app:cornerRadius="15dp"
+        app:layout_constraintEnd_toEndOf="@+id/support_activity_message"
+        app:layout_constraintHorizontal_bias="1.0"
+        app:layout_constraintStart_toStartOf="@+id/support_activity_message"
+        app:layout_constraintTop_toBottomOf="@+id/support_activity_message" />
+
+    <TextView
+        android:id="@+id/textView4"
+        android:layout_width="314dp"
+        android:layout_height="46dp"
+        android:fontFamily="@font/open_sans_light"
+        android:gravity="center"
+        android:text="Gönderdiğiniz destek taleplerinize e-posta yoluyla cevap gönderilecektir."
+        android:textColor="#191919"
+        android:textSize="18sp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/textView5" />
+
+    <TextView
+        android:id="@+id/textView5"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="48dp"
+        android:fontFamily="@font/abhaya_libre"
+        android:text="DESTEK"
+        android:textColor="#121212"
+        android:textSize="36sp"
+        android:textStyle="bold"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.498"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/header_include" />
+
+    <include
+        android:id="@+id/footer_include"
+        layout="@layout/footer"
+        android:layout_width="match_parent"
+        android:layout_height="80dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent" />
+
+    <include
+        android:id="@+id/header_include"
+        layout="@layout/header"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <EditText
+        android:id="@+id/support_activity_email"
+        android:layout_width="313dp"
+        android:layout_height="41dp"
+        android:layout_marginTop="32dp"
+        android:background="@color/background_featured_color"
+        android:ems="10"
+        android:inputType="none"
+        app:layout_constraintEnd_toEndOf="@+id/textView4"
+        app:layout_constraintHorizontal_bias="1.0"
+        app:layout_constraintStart_toStartOf="@+id/textView4"
+        app:layout_constraintTop_toBottomOf="@+id/textView4"
+        tools:ignore="SpeakableTextPresentCheck,TouchTargetSizeCheck" />
+
+    <EditText
+        android:id="@+id/support_activity_title"
+        android:layout_width="314dp"
+        android:layout_height="40dp"
+        android:layout_marginTop="12dp"
+        android:background="@color/white"
+        android:ems="10"
+        android:hint="Başlık"
+        android:inputType="textPersonName"
+        android:padding="5dp"
+        app:layout_constraintEnd_toEndOf="@+id/support_activity_email"
+        app:layout_constraintStart_toStartOf="@+id/support_activity_email"
+        app:layout_constraintTop_toBottomOf="@+id/support_activity_email"
+        tools:ignore="TouchTargetSizeCheck" />
+
+    <EditText
+        android:id="@+id/support_activity_message"
+        android:layout_width="313dp"
+        android:layout_height="117dp"
+        android:layout_marginTop="12dp"
+        android:background="@color/white"
+        android:ems="10"
+        android:gravity="start|top"
+        android:hint="Mesajınız"
+        android:inputType="textMultiLine"
+        android:padding="5dp"
+        app:layout_constraintEnd_toEndOf="@+id/support_activity_title"
+        app:layout_constraintStart_toStartOf="@+id/support_activity_title"
+        app:layout_constraintTop_toBottomOf="@+id/support_activity_title" />
+
+</androidx.constraintlayout.widget.ConstraintLayout>

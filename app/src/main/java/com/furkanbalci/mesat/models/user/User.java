@@ -2,19 +2,45 @@ package com.furkanbalci.mesat.models.user;
 
 import androidx.annotation.NonNull;
 
-import com.furkanbalci.mesat.database.object.DatabaseObject;
+import com.google.gson.annotations.Expose;
+import com.google.gson.annotations.SerializedName;
 
 import java.util.Objects;
 
 /**
  * User class.
  */
-public final class User implements DatabaseObject {
+public final class User {
 
     private final long cachingDate;
+
+    @SerializedName("id")
+    @Expose
     private final int id;
+
+    @SerializedName("name")
+    @Expose
     private final String name;
+
+    @SerializedName("surname")
+    @Expose
     private final String surname;
+
+    @SerializedName("mail")
+    @Expose
+    private final String mail;
+
+    @SerializedName("password")
+    @Expose
+    private final String password;
+
+    @SerializedName("phone")
+    @Expose
+    private final String phone;
+
+    @SerializedName("profile_photo_id")
+    @Expose
+    private String profile_photo_id = "1";
 
     /**
      * User creator.
@@ -23,11 +49,15 @@ public final class User implements DatabaseObject {
      * @param name    Name.
      * @param surname Surname.
      */
-    public User(int id, @NonNull String name, @NonNull String surname) {
+    public User(int id, @NonNull String name, @NonNull String surname, @NonNull String mail, @NonNull String phone, @NonNull String password) {
         this.id = id;
         this.name = Objects.requireNonNull(name);
         this.surname = Objects.requireNonNull(surname);
+        this.mail = Objects.requireNonNull(mail);
+        this.phone = Objects.requireNonNull(phone);
+        this.password = Objects.requireNonNull(password);
         this.cachingDate = System.currentTimeMillis();
+        this.profile_photo_id = "1";
     }
 
     /**
@@ -67,18 +97,19 @@ public final class User implements DatabaseObject {
         return this.surname;
     }
 
-    @Override
-    public String toInsertQuery() {
-        return "INSERT INTO"; //TODO:YAPILACAK
+    public String getPhone() {
+        return phone;
     }
 
-    @Override
-    public String toUpdateQuery() {
-        return "UPDATE"; //TODO:YAPILACAK
+    public String getMail() {
+        return this.mail;
     }
 
-    @Override
-    public String toDeleteQuery() {
-        return "DELETE"; //TODO:YAPILACAK
+    public String getPassword() {
+        return this.password;
+    }
+
+    public String getProfile_photo_id() {
+        return this.profile_photo_id;
     }
 }

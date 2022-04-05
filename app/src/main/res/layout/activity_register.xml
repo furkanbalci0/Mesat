@@ -22,13 +22,13 @@
         app:layout_constraintTop_toBottomOf="@+id/editTextTextPersonEMail" />
 
     <CheckBox
-        android:id="@+id/checkBox"
+        android:id="@+id/register_check_box"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="Kayıt Sözleşmesini okudum ve kabul ediyorum."
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/editTextTextPersonRePassword" />
+        app:layout_constraintTop_toBottomOf="@+id/editTextTextPersonPassword" />
 
     <TextView
         android:id="@+id/textView7"
@@ -58,7 +58,7 @@
         android:textSize="24sp"
         app:cornerRadius="15dp"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/checkBox" />
+        app:layout_constraintTop_toBottomOf="@+id/register_check_box" />
 
     <EditText
         android:id="@+id/editTextTextPersonEMail"
@@ -100,7 +100,7 @@
         android:textSize="24sp"
         android:textStyle="bold"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/checkBox" />
+        app:layout_constraintTop_toBottomOf="@+id/register_check_box" />
 
     <EditText
         android:id="@+id/editTextTextPersonPhoneNumber"
@@ -119,7 +119,7 @@
     <TextView
         android:id="@+id/textView8"
         android:layout_width="346dp"
-        android:layout_height="64dp"
+        android:layout_height="71dp"
         android:fontFamily="@font/open_sans_light"
         android:gravity="center"
         android:text="Kayıt olduğunuzda bazı onaylamaları, reklam bildirimlerini ve benzeri bildirimleri alabileceğinizi onaylamış olursunuz."
@@ -133,30 +133,16 @@
         android:id="@+id/editTextTextPersonName"
         android:layout_width="318dp"
         android:layout_height="wrap_content"
-        android:layout_marginTop="12dp"
+        android:layout_marginTop="48dp"
         android:ems="10"
         android:fontFamily="@font/open_sans_light"
-        android:inputType="textPersonName"
         android:hint="İsminiz"
+        android:inputType="textPersonName"
         android:textSize="22sp"
         app:layout_constraintEnd_toEndOf="@+id/textView8"
         app:layout_constraintHorizontal_bias="0.464"
         app:layout_constraintStart_toStartOf="@+id/textView8"
         app:layout_constraintTop_toBottomOf="@+id/textView8" />
-
-    <EditText
-        android:id="@+id/editTextTextPersonRePassword"
-        android:layout_width="318dp"
-        android:layout_height="wrap_content"
-        android:ems="10"
-        android:fontFamily="@font/open_sans_light"
-        android:inputType="textVisiblePassword"
-        android:hint="Tekrar Şifreniz"
-        android:textSize="22sp"
-        app:layout_constraintEnd_toEndOf="@+id/editTextTextPersonPassword"
-        app:layout_constraintHorizontal_bias="0.0"
-        app:layout_constraintStart_toStartOf="@+id/editTextTextPersonPassword"
-        app:layout_constraintTop_toBottomOf="@+id/editTextTextPersonPassword" />
 
     <include
         android:id="@+id/header_include"

@@ -2,84 +2,70 @@ package com.furkanbalci.mesat.models.auction;
 
 import androidx.annotation.NonNull;
 
-import com.furkanbalci.mesat.models.user.User;
-import com.furkanbalci.mesat.models.auction.defaults.AuctionStatus;
+import com.google.gson.annotations.Expose;
+import com.google.gson.annotations.SerializedName;
 
 import java.util.Date;
 import java.util.Objects;
-import java.util.UUID;
 
 /**
  * Auction class.
  */
 public final class Auction {
 
-    private final UUID uid;
-    private final Date startingDate;
-    private final User owner;
-    private final int startingPrice;
+    @SerializedName("id")
+    @Expose
+    private int id;
 
-    private AuctionStatus status;
+    @SerializedName("starting_time")
+    @Expose
+    private long startingDate;
+
+    @SerializedName("owner_id")
+    @Expose
+    private int owner_id;
+
+    @SerializedName("starting_price")
+    @Expose
+    private int startingPrice;
+
+    @SerializedName("sold")
+    @Expose
+    private boolean status;
+
+    @SerializedName("title")
+    @Expose
     private String title;
+
+    @SerializedName("description")
+    @Expose
     private String description;
-    private Date endDate;
+
+    @SerializedName("end_time")
+    @Expose
+    private long endDate;
+
+    @SerializedName("showcase_photo_id")
+    @Expose
+    private String showcase_photo_id;
 
 
     /**
-     * Auction creator.
+     * Gets auction id.
      *
-     * @param owner      User.
-     * @param auctionUID Auction Id.
+     * @return Auction id.
      */
-    public Auction(@NonNull User owner, @NonNull UUID auctionUID) {
-        this.owner = Objects.requireNonNull(owner);
-        this.uid = Objects.requireNonNull(auctionUID);
-        this.startingDate = new Date(); //TODO: Veri database üzerinden çekilecektir.
-        this.startingPrice = 1; //TODO: Veri database üzerinden çekilecektir.
+    public int getId() {
+        return this.id;
     }
 
     /**
-     * Auction creator.
+     * Gets user id.
      *
-     * @param owner User.
+     * @return User id.
      */
-    public Auction(@NonNull User owner) {
-        this.owner = Objects.requireNonNull(owner);
-        this.uid = UUID.randomUUID();
-        this.startingDate = new Date();
-        this.startingPrice = 1;
-    }
-
-    /**
-     * Gets UUID.
-     *
-     * @return UUID.
-     */
-    @NonNull
-    public UUID getUID() {
-        return this.uid;
-    }
-
-    /**
-     * Gets starting date. The date is
-     * determined when the auction is
-     * created.
-     *
-     * @return Date.
-     */
-    @NonNull
-    public Date getStartingDate() {
-        return this.startingDate;
-    }
-
-    /**
-     * Gets owner of Auction as user.
-     *
-     * @return User.
-     */
-    @NonNull
-    public User getOwner() {
-        return this.owner;
+    public int getOwner_id() {
+        return this.owner_id;
     }
 
     /**
@@ -119,27 +105,6 @@ public final class Auction {
     public void setDescription(@NonNull String description) {
         this.description = Objects.requireNonNull(description);
     }
-
-    /**
-     * Gets end date. If the date is not entered by user,
-     * sets automatically.
-     *
-     * @return End date.
-     */
-    @NonNull
-    public Date getEndDate() {
-        return this.endDate;
-    }
-
-    /**
-     * Sets end date.
-     *
-     * @param endDate Date.
-     */
-    public void setEndDate(@NonNull Date endDate) {
-        this.endDate = Objects.requireNonNull(endDate);
-    }
-
     /**
      * Gets starting price. Default as 1.
      *
@@ -149,20 +114,15 @@ public final class Auction {
         return this.startingPrice;
     }
 
-    /**
-     * Gets auction status.
-     * @return Status.
-     */
-    @NonNull
-    public AuctionStatus getStatus() {
-        return this.status;
+    public boolean isStatus() {
+        return status;
     }
 
-    /**
-     * Sets auction status.
-     * @param status Status.
-     */
-    public void setStatus(@NonNull AuctionStatus status) {
-        this.status = Objects.requireNonNull(status);
+    public void setStatus(boolean status) {
+        this.status = status;
+    }
+
+    public String getShowcase_photo_id() {
+        return showcase_photo_id;
     }
 }
