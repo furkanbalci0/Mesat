@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "29756246840",
+    "project_id": "mesat-cc215",
+    "storage_bucket": "mesat-cc215.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:29756246840:android:3bf4187fd2daa181d0cfcd",
+        "android_client_info": {
+          "package_name": "com.furkanbalci.mesat"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "29756246840-78n6rkrla6p99ud6aujtc2csdjbu3pm0.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyD7_rWHesy1bqTLIkC1AZqKCKfh4lq9_2Q"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "29756246840-78n6rkrla6p99ud6aujtc2csdjbu3pm0.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

@@ -58,5 +58,13 @@ public interface UserService {
      */
     @POST("users/add")
     Call<User> register(@Body User user);
+    /**
+     * Register user.
+     *
+     * @param user User.
+     * @return User.
+     */
+    @POST("users/update")
+    Call<User> update(@Body User user);
 
 }

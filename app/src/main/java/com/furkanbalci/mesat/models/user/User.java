@@ -12,104 +12,71 @@ import java.util.Objects;
  */
 public final class User {
 
-    private final long cachingDate;
-
-    @SerializedName("id")
-    @Expose
-    private final int id;
-
-    @SerializedName("name")
-    @Expose
+    private long cachingDate;
+    private final String id;
     private final String name;
-
-    @SerializedName("surname")
-    @Expose
     private final String surname;
-
-    @SerializedName("mail")
-    @Expose
-    private final String mail;
-
-    @SerializedName("password")
-    @Expose
+    private String mail;
     private final String password;
-
-    @SerializedName("phone")
-    @Expose
+    private String city;
     private final String phone;
-
-    @SerializedName("profile_photo_id")
-    @Expose
     private String profile_photo_id = "1";
 
-    /**
-     * User creator.
-     *
-     * @param id      Id.
-     * @param name    Name.
-     * @param surname Surname.
-     */
-    public User(int id, @NonNull String name, @NonNull String surname, @NonNull String mail, @NonNull String phone, @NonNull String password) {
+    public User(String id, String name, String surname, String mail, String password, String city, String phone) {
         this.id = id;
-        this.name = Objects.requireNonNull(name);
-        this.surname = Objects.requireNonNull(surname);
-        this.mail = Objects.requireNonNull(mail);
-        this.phone = Objects.requireNonNull(phone);
-        this.password = Objects.requireNonNull(password);
-        this.cachingDate = System.currentTimeMillis();
-        this.profile_photo_id = "1";
+        this.name = name;
+        this.surname = surname;
+        this.mail = mail;
+        this.password = password;
+        this.city = city;
+        this.phone = phone;
     }
 
-    /**
-     * Gets caching date.
-     *
-     * @return Gets caching date.
-     */
     public long getCachingDate() {
-        return this.cachingDate;
+        return cachingDate;
     }
 
-    /**
-     * Gets uuid of user.
-     *
-     * @return Id.
-     */
-    public int getID() {
-        return this.id;
+    public String getId() {
+        return id;
     }
 
-    /**
-     * Gets name of user.
-     *
-     * @return User name.
-     */
     public String getName() {
-        return this.name;
+        return name;
     }
 
-    /**
-     * Gets surname of user.
-     *
-     * @return User surname.
-     */
-    @NonNull
     public String getSurname() {
-        return this.surname;
+        return surname;
+    }
+
+    public String getMail() {
+        return mail;
+    }
+
+    public void setMail(String mail) {
+        this.mail = mail;
+    }
+
+    public String getPassword() {
+        return password;
+    }
+
+    public String getCity() {
+        return city;
+    }
+
+    public void setCity(String city) {
+        this.city = city;
     }
 
     public String getPhone() {
         return phone;
     }
 
-    public String getMail() {
-        return this.mail;
-    }
-
-    public String getPassword() {
-        return this.password;
-    }
-
     public String getProfile_photo_id() {
-        return this.profile_photo_id;
+        return profile_photo_id;
+    }
+
+    public void setProfile_photo_id(String profile_photo_id) {
+        this.profile_photo_id = profile_photo_id;
     }
 }

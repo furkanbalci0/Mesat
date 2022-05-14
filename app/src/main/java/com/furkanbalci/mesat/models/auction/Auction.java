@@ -1,128 +1,103 @@
 package com.furkanbalci.mesat.models.auction;
 
-import androidx.annotation.NonNull;
-
-import com.google.gson.annotations.Expose;
-import com.google.gson.annotations.SerializedName;
-
 import java.util.Date;
-import java.util.Objects;
 
 /**
  * Auction class.
  */
 public final class Auction {
 
-    @SerializedName("id")
-    @Expose
-    private int id;
-
-    @SerializedName("starting_time")
-    @Expose
-    private long startingDate;
-
-    @SerializedName("owner_id")
-    @Expose
-    private int owner_id;
-
-    @SerializedName("starting_price")
-    @Expose
-    private int startingPrice;
-
-    @SerializedName("sold")
-    @Expose
-    private boolean status;
-
-    @SerializedName("title")
-    @Expose
+    private String id;
+    private Date starting_time;
+    private long owner_id;
+    private long starting_price;
+    private boolean sold;
     private String title;
+    private String category;
+    private Date end_time;
+    private String showcase_photo;
 
-    @SerializedName("description")
-    @Expose
-    private String description;
-
-    @SerializedName("end_time")
-    @Expose
-    private long endDate;
-
-    @SerializedName("showcase_photo_id")
-    @Expose
-    private String showcase_photo_id;
-
-
-    /**
-     * Gets auction id.
-     *
-     * @return Auction id.
-     */
-    public int getId() {
-        return this.id;
+    public Auction(String id, Date starting_time, long owner_id, long starting_price, boolean sold, String title, String category, Date end_time, String showcase_photo) {
+        this.id = id;
+        this.starting_time = starting_time;
+        this.owner_id = owner_id;
+        this.starting_price = starting_price;
+        this.sold = sold;
+        this.title = title;
+        this.category = category;
+        this.end_time = end_time;
+        this.showcase_photo = showcase_photo;
     }
 
-    /**
-     * Gets user id.
-     *
-     * @return User id.
-     */
-    public int getOwner_id() {
-        return this.owner_id;
+    public String getId() {
+        return id;
     }
 
-    /**
-     * Gets auction title.
-     *
-     * @return Title.
-     */
-    @NonNull
+    public void setId(String id) {
+        this.id = id;
+    }
+
+    public Date getStarting_time() {
+        return starting_time;
+    }
+
+    public void setStarting_time(Date starting_time) {
+        this.starting_time = starting_time;
+    }
+
+    public long getOwner_id() {
+        return owner_id;
+    }
+
+    public void setOwner_id(long owner_id) {
+        this.owner_id = owner_id;
+    }
+
+    public long getStarting_price() {
+        return starting_price;
+    }
+
+    public void setStarting_price(long starting_price) {
+        this.starting_price = starting_price;
+    }
+
+    public boolean isSold() {
+        return sold;
+    }
+
+    public void setSold(boolean sold) {
+        this.sold = sold;
+    }
+
     public String getTitle() {
-        return this.title;
+        return title;
     }
 
-    /**
-     * Sets auction title.
-     *
-     * @param title Title.
-     */
-    public void setTitle(@NonNull String title) {
-        this.title = Objects.requireNonNull(title);
+    public void setTitle(String title) {
+        this.title = title;
     }
 
-    /**
-     * Gets description of Auction.
-     *
-     * @return Auction.
-     */
-    @NonNull
-    public String getDescription() {
-        return this.description;
+    public String getCategory() {
+        return category;
     }
 
-    /**
-     * Sets description of Auction.
-     *
-     * @param description Description.
-     */
-    public void setDescription(@NonNull String description) {
-        this.description = Objects.requireNonNull(description);
-    }
-    /**
-     * Gets starting price. Default as 1.
-     *
-     * @return Starting price.
-     */
-    public int getStartingPrice() {
-        return this.startingPrice;
+    public void setCategory(String category) {
+        this.category = category;
     }
 
-    public boolean isStatus() {
-        return status;
+    public Date getEnd_time() {
+        return end_time;
     }
 
-    public void setStatus(boolean status) {
-        this.status = status;
+    public void setEnd_time(Date end_time) {
+        this.end_time = end_time;
     }
 
-    public String getShowcase_photo_id() {
-        return showcase_photo_id;
+    public String getShowcase_photo() {
+        return showcase_photo;
+    }
+
+    public void setShowcase_photo(String showcase_photo) {
+        this.showcase_photo = showcase_photo;
     }
 }

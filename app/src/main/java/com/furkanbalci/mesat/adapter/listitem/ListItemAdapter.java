@@ -61,11 +61,11 @@ public class ListItemAdapter extends BaseAdapter {
 
         Auction auction = this.auctions.get(position);
         title.setText(auction.getTitle());
-        category.setText(auction.getDescription());
+        category.setText(auction.getCategory());
         owner.setText(auction.getOwner_id() + "");
         DecimalFormat df = new DecimalFormat("###.#");
-        price.setText(df.format(auction.getStartingPrice()) + "₺");
-        GlideUtil.downloadAndShow(this.context, auction.getShowcase_photo_id(), imageView);
+        price.setText(df.format(auction.getStarting_price()) + "₺");
+        GlideUtil.downloadAndShow(this.context, auction.getShowcase_photo(), imageView);
         return convertView;
     }
 }

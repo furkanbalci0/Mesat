@@ -2,19 +2,30 @@ package com.furkanbalci.mesat.ui;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
 
 import android.os.Bundle;
+import android.view.View;
 import android.widget.TextView;
 
+import com.furkanbalci.mesat.MainActivity;
 import com.furkanbalci.mesat.R;
+import com.furkanbalci.mesat.adapter.item.ItemAdapter;
 import com.furkanbalci.mesat.adapter.listitem.ListItemAdapter;
 import com.furkanbalci.mesat.data.LocalDataManager;
 import com.furkanbalci.mesat.databinding.ActivityListBinding;
 import com.furkanbalci.mesat.models.auction.Auction;
 import com.furkanbalci.mesat.network.Service;
 import com.furkanbalci.mesat.network.auction.AuctionService;
-import com.furkanbalci.mesat.utils.ButtonUtils;
+import com.furkanbalci.mesat.utils.FooterButtonUtils;
+import com.furkanbalci.mesat.utils.HeaderButtonUtils;
+import com.furkanbalci.mesat.utils.MenuButtonUtils;
+import com.google.firebase.firestore.CollectionReference;
+import com.google.firebase.firestore.FirebaseFirestore;
+import com.google.firebase.firestore.QueryDocumentSnapshot;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import retrofit2.Call;
@@ -31,10 +42,22 @@ public class ListActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         binding = ActivityListBinding.inflate(super.getLayoutInflater());
         this.setContentView(binding.getRoot());
+
+        //Local datadan arama kelimesini alıyor.
         this.key = LocalDataManager.getString(this, "key", "test");
         this.initialize();
-        ButtonUtils buttonUtils = new ButtonUtils();
-        buttonUtils.setupButtons(this);
+
+        //Footer ve header'da bulunan butonların işlevli hale gelmesini sağlıyor.
+        FooterButtonUtils footerButtonUtils = new FooterButtonUtils();
+        footerButtonUtils.setupButtons(this);
+        HeaderButtonUtils headerButtonUtils = new HeaderButtonUtils();
+        headerButtonUtils.setupButtons(this);
+        MenuButtonUtils menuButtonUtils = new MenuButtonUtils();
+        menuButtonUtils.setupButtons(this);
+
+        //Menünün ilk başta görünmez olmasını sağlamak için invisible yapıyoruz.
+        View include = this.findViewById(R.id.menu_include);
+        include.setVisibility(View.INVISIBLE);
     }
 
     private void initialize() {
@@ -42,25 +65,36 @@ public class ListActivity extends AppCompatActivity {
         TextView textView = this.findViewById(R.id.search_key);
         textView.setText(this.key);
 
-        AuctionService auctionService = Service.getRetrofit().create(AuctionService.class);
+        FirebaseFirestore db = FirebaseFirestore.getInstance();
 
-        Call<List<Auction>> auctions = auctionService.findAuctionsByNameOrDescription(this.key);
+        CollectionReference collection = db.collection("auctions");
 
-        auctions.enqueue(new Callback<List<Auction>>() {
-            @Override
-            public void onResponse(@NonNull Call<List<Auction>> call, @NonNull Response<List<Auction>> response) {
+        collection.whereEqualTo("category", this.key).get().addOnCompleteListener(task -> {
 
-                List<Auction> auctions = response.body();
+            if (task.isSuccessful()) {
 
+                List<Auction> auctions = new ArrayList<>();
+
+                for (QueryDocumentSnapshot document : task.getResult()) {
+                    Auction auction = new Auction(
+                            document.getId(),
+                            document.getDate("starting_time"),
+                            document.getLong("owner_id"),
+                            document.getLong("starting_price"),
+                            document.getBoolean("sold"),
+                            document.getString("title"),
+                            document.getString("category"),
+                            document.getDate("end_time"),
+                            document.getString("showcase_photo"));
+                    auctions.add(auction);
+                }
+
+                //Liste yapısını çağırıyoruz.
                 ListItemAdapter adapter = new ListItemAdapter(auctions, getApplicationContext());
+
+                //Adaptere kayıt ediyor.
                 binding.gridView.setAdapter(adapter);
             }
-
-            @Override
-            public void onFailure(Call<List<Auction>> call, Throwable t) {
-                t.printStackTrace();
-            }
         });
-
     }
 }

@@ -7,40 +7,37 @@ public class Support {
 
     @SerializedName("id")
     @Expose
-    private int id;
-
+    private Long id;
     @SerializedName("sender_id")
     @Expose
-    private long senderId;
-
+    private Long senderId;
     @SerializedName("content_title")
     @Expose
     private String contentTitle;
-
     @SerializedName("content_message")
     @Expose
     private String contentMessage;
 
-    public Support(int id, long senderId, String contentTitle, String contentMessage) {
+    public Support(Long id, Long senderId, String contentTitle, String contentMessage) {
         this.id = id;
         this.senderId = senderId;
         this.contentTitle = contentTitle;
         this.contentMessage = contentMessage;
     }
 
-    public int getId() {
-        return this.id;
+    public Long getId() {
+        return id;
     }
 
-    public long getSenderId() {
-        return this.senderId;
+    public Long getSenderId() {
+        return senderId;
     }
 
     public String getContentTitle() {
-        return this.contentTitle;
+        return contentTitle;
     }
 
     public String getContentMessage() {
-        return this.contentMessage;
+        return contentMessage;
     }
 }
