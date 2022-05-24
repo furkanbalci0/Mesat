@@ -7,8 +7,6 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import com.furkanbalci.mesat.MainActivity;
 import com.furkanbalci.mesat.R;
-import com.furkanbalci.mesat.ui.AuctionCreateActivity;
-import com.furkanbalci.mesat.ui.ProfileActivity;
 
 public class MenuButtonUtils {
 
@@ -25,22 +23,7 @@ public class MenuButtonUtils {
             activity.startActivity(intent);
         });
 
-        //Profile button.
-        activity.findViewById(R.id.menu_button_auction).setOnClickListener(v -> {
-            Intent intent = new Intent(activity, AuctionCreateActivity.class);
-            activity.startActivity(intent);
-        });
 
-        //Search button.
-        activity.findViewById(R.id.menu_button_support).setOnClickListener(v -> {
-
-        });
-
-        //Support button.
-        activity.findViewById(R.id.menu_button_profile).setOnClickListener(v -> {
-            Intent intent = new Intent(activity, ProfileActivity.class);
-            activity.startActivity(intent);
-        });
 
     }
 }

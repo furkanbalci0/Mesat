@@ -6,9 +6,13 @@ import android.view.View;
 import android.view.ViewGroup;
 
 import androidx.annotation.NonNull;
+import androidx.fragment.app.FragmentManager;
+import androidx.fragment.app.FragmentTransaction;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.furkanbalci.mesat.MainActivity;
 import com.furkanbalci.mesat.R;
+import com.furkanbalci.mesat.fragments.DetailsFragment;
 import com.furkanbalci.mesat.models.auction.Auction;
 import com.furkanbalci.mesat.utils.GlideUtil;
 
@@ -42,7 +46,16 @@ public class ItemAdapter extends RecyclerView.Adapter<ItemViewHolder> {
         DecimalFormat df = new DecimalFormat("###.#");
         holder.price.setText(df.format(auction.getStarting_price()) + "₺");
         GlideUtil.downloadAndShow(this.context, auction.getShowcase_photo(), holder.imageView);
+
+        holder.imageView.setOnClickListener(v -> {
+            FragmentManager fragmentManager = ((MainActivity) context).getSupportFragmentManager();
+            FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
+
+            fragmentTransaction.replace(R.id.frame, new DetailsFragment(auction.getId()));
+            fragmentTransaction.commit();
+        });
     }
+
 
     @Override
     public int getItemCount() {

@@ -16,8 +16,9 @@ public final class Auction {
     private String category;
     private Date end_time;
     private String showcase_photo;
+    private String content;
 
-    public Auction(String id, Date starting_time, long owner_id, long starting_price, boolean sold, String title, String category, Date end_time, String showcase_photo) {
+    public Auction(String id, Date starting_time, long owner_id, long starting_price, boolean sold, String title, String category, Date end_time, String showcase_photo, String content) {
         this.id = id;
         this.starting_time = starting_time;
         this.owner_id = owner_id;
@@ -27,6 +28,7 @@ public final class Auction {
         this.category = category;
         this.end_time = end_time;
         this.showcase_photo = showcase_photo;
+        this.content = content;
     }
 
     public String getId() {
@@ -99,5 +101,13 @@ public final class Auction {
 
     public void setShowcase_photo(String showcase_photo) {
         this.showcase_photo = showcase_photo;
+    }
+
+    public String getContent() {
+        return content;
+    }
+
+    public void setContent(String content) {
+        this.content = content;
     }
 }

@@ -3,6 +3,8 @@ package com.furkanbalci.mesat.fragments;
 import android.os.Bundle;
 
 import androidx.fragment.app.Fragment;
+import androidx.fragment.app.FragmentManager;
+import androidx.fragment.app.FragmentTransaction;
 
 import android.view.LayoutInflater;
 import android.view.View;
@@ -23,14 +25,26 @@ public class RegisterFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         ViewGroup viewGroup = (ViewGroup) inflater.inflate(R.layout.fragment_register, container, false);
 
+        String id = LocalDataManager.getString(container.getContext(), "id", null);
+        if (id != null){
+            FragmentManager fragmentManager = getParentFragmentManager();
+            FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
+
+            fragmentTransaction.replace(R.id.frame, new ProfileFragment());
+            fragmentTransaction.commit();
+            return viewGroup;
+        }
 
         FirebaseFirestore db = FirebaseFirestore.getInstance();
 
 
         //Login button.
         viewGroup.findViewById(R.id.register_activity_login_button2).setOnClickListener(v -> {
+            FragmentManager fragmentManager = getParentFragmentManager();
+            FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
 
-            //todo yapılacak
+            fragmentTransaction.replace(R.id.frame, new LoginFragment());
+            fragmentTransaction.commit();
         });
 
         viewGroup.findViewById(R.id.register_activity_register_button3).setOnClickListener(v -> {
@@ -49,11 +63,12 @@ public class RegisterFragment extends Fragment {
             }
 
             //TextViewlerin içinde yazan veriler ile yeni bir user oluşturuyoruz.
-            User user = new User("0", name.getText().toString(), surname.getText().toString(), mail.getText().toString(), phone.getText().toString(), "Bilinmiyor", pass.getText().toString());
+            User user = new User("0", name.getText().toString(), surname.getText().toString(), mail.getText().toString(), pass.getText().toString(), "Bilinmiyor", phone.getText().toString());
 
             db.collection("users").add(user).addOnCompleteListener(task -> {
                 LocalDataManager.setString(viewGroup.getContext(), "id", user.getId());
                 LocalDataManager.setString(viewGroup.getContext(), "mail", user.getMail());
+                LocalDataManager.setString(viewGroup.getContext(), "name", user.getName());
                 LocalDataManager.setLong(viewGroup.getContext(), "last_login", System.currentTimeMillis());
                 LocalDataManager.setString(viewGroup.getContext(), "object", new Gson().toJson(user));
 

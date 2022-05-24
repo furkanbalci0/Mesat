@@ -4,6 +4,8 @@ import android.content.Intent;
 import android.os.Bundle;
 
 import androidx.fragment.app.Fragment;
+import androidx.fragment.app.FragmentManager;
+import androidx.fragment.app.FragmentTransaction;
 
 import android.view.LayoutInflater;
 import android.view.View;
@@ -24,12 +26,30 @@ public class LoginFragment extends Fragment {
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
+
+
         ViewGroup viewGroup = (ViewGroup) inflater.inflate(R.layout.fragment_login, container, false);
+
+        String id = LocalDataManager.getString(container.getContext(), "id", null);
+        if (id != null){
+            FragmentManager fragmentManager = getParentFragmentManager();
+            FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
+
+            fragmentTransaction.replace(R.id.frame, new ProfileFragment());
+            fragmentTransaction.commit();
+            return viewGroup;
+        }
 
         FirebaseFirestore db = FirebaseFirestore.getInstance();
 
-        //Kullanıcı eğer ki daha önceden giriş yapmışsa, kayıtlı olan id'yi çekiyoruz.
-        String id = LocalDataManager.getString(viewGroup.getContext(), "id", "0");
+        //Login button.
+        viewGroup.findViewById(R.id.login_activity_register_button).setOnClickListener(v -> {
+            FragmentManager fragmentManager = getParentFragmentManager();
+            FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
+
+            fragmentTransaction.replace(R.id.frame, new RegisterFragment());
+            fragmentTransaction.commit();
+        });
 
         //Giriş yap butonuna tıkladığında çalışacaklar.
         viewGroup.findViewById(R.id.login_activity_login_button).setOnClickListener(v -> {
@@ -57,16 +77,13 @@ public class LoginFragment extends Fragment {
                                 document.getString("name"),
                                 document.getString("surname"),
                                 document.getString("mail"),
-                                document.getString("phone"),
+                                document.getString("password"),
                                 document.getString("city"),
-                                document.getString("password"));
+                                document.getString("phone"));
 
-                        //Eğer ki böyle bir kullanıcı yoksa, kullanıcıya hata mesajı gönderiyoruz.
-                        if (user == null) {
-                            Toast.makeText(viewGroup.getContext(), "Böyle bir kullanıcı bulunamadı!", Toast.LENGTH_LONG).show();
-                            return;
-                        }
-
+                        System.out.println(user.getPassword());
+                        System.out.println(user.getMail());
+                        System.out.println(password.getText().toString());
                         //API'den gelen istekteki kullanıcının şifresi ile textView
                         //içindeki şifre aynı mı diye kontrol ediyoruz.
                         if (!user.getPassword().contentEquals(password.getText().toString())) {
@@ -79,6 +96,7 @@ public class LoginFragment extends Fragment {
                         System.out.println("DEBUG: 1 >>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>");
                         LocalDataManager.setString(viewGroup.getContext(), "id", user.getId());
                         LocalDataManager.setString(viewGroup.getContext(), "mail", user.getMail());
+                        LocalDataManager.setString(viewGroup.getContext(), "name", user.getName());
                         LocalDataManager.setLong(viewGroup.getContext(), "last_login", System.currentTimeMillis());
                         LocalDataManager.setString(viewGroup.getContext(), "object", new Gson().toJson(user));
 
@@ -97,6 +115,8 @@ public class LoginFragment extends Fragment {
             });
 
         });
+
+
 
         return viewGroup;
     }

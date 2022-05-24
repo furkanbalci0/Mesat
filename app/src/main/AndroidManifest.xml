@@ -17,16 +17,10 @@
         android:theme="@style/Theme.Mesat"
         tools:targetApi="m">
         <activity
-            android:name=".ui.AuctionCreateActivity"
-            android:exported="false" />
-        <activity
             android:name=".ui.SearchActivity"
             android:exported="false" />
         <activity
             android:name=".ui.ListActivity"
-            android:exported="false" />
-        <activity
-            android:name=".ui.ProfileActivity"
             android:exported="false" />
         <activity
             android:name=".ui.login.LoginActivity"

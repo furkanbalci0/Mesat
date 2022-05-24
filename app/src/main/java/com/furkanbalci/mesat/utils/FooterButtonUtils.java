@@ -8,6 +8,7 @@ import androidx.fragment.app.FragmentTransaction;
 
 import com.furkanbalci.mesat.R;
 import com.furkanbalci.mesat.data.LocalDataManager;
+import com.furkanbalci.mesat.fragments.AuctionCreateFragment;
 import com.furkanbalci.mesat.fragments.LoginFragment;
 import com.furkanbalci.mesat.fragments.MainFragment;
 import com.furkanbalci.mesat.fragments.RegisterFragment;
@@ -46,8 +47,11 @@ public class FooterButtonUtils {
 
         //Profile button.
         activity.findViewById(R.id.footer_icon_add).setOnClickListener(v -> {
-            Intent intent = new Intent(activity, ListActivity.class);
-            activity.startActivity(intent);
+            FragmentManager fragmentManager = activity.getSupportFragmentManager();
+            FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
+
+            fragmentTransaction.replace(R.id.frame, new AuctionCreateFragment());
+            fragmentTransaction.commit();
         });
 
         //Search button.

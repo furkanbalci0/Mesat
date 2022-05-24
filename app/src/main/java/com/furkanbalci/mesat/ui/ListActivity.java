@@ -77,7 +77,7 @@ public class ListActivity extends AppCompatActivity {
 
                 for (QueryDocumentSnapshot document : task.getResult()) {
                     Auction auction = new Auction(
-                            document.getId(),
+                            document.getString("id"),
                             document.getDate("starting_time"),
                             document.getLong("owner_id"),
                             document.getLong("starting_price"),
@@ -85,12 +85,16 @@ public class ListActivity extends AppCompatActivity {
                             document.getString("title"),
                             document.getString("category"),
                             document.getDate("end_time"),
-                            document.getString("showcase_photo"));
+                            document.getString("showcase_photo"),
+                            document.getString("content"));
                     auctions.add(auction);
                 }
 
                 //Liste yapısını çağırıyoruz.
                 ListItemAdapter adapter = new ListItemAdapter(auctions, getApplicationContext());
+                for (int i = 0; i < adapter.getCount(); i++) {
+                    Object item = adapter.getItem(i);
+                }
 
                 //Adaptere kayıt ediyor.
                 binding.gridView.setAdapter(adapter);

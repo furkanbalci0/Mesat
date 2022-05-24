@@ -9,7 +9,13 @@ import android.widget.BaseAdapter;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import androidx.fragment.app.FragmentManager;
+import androidx.fragment.app.FragmentTransaction;
+
+import com.furkanbalci.mesat.MainActivity;
 import com.furkanbalci.mesat.R;
+import com.furkanbalci.mesat.fragments.DetailsFragment;
+import com.furkanbalci.mesat.fragments.MainFragment;
 import com.furkanbalci.mesat.models.auction.Auction;
 import com.furkanbalci.mesat.utils.GlideUtil;
 
@@ -66,6 +72,14 @@ public class ListItemAdapter extends BaseAdapter {
         DecimalFormat df = new DecimalFormat("###.#");
         price.setText(df.format(auction.getStarting_price()) + "₺");
         GlideUtil.downloadAndShow(this.context, auction.getShowcase_photo(), imageView);
+
+        convertView.setOnClickListener(v -> {
+            FragmentManager fragmentManager = ((MainActivity) context).getSupportFragmentManager();
+            FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
+
+            fragmentTransaction.replace(R.id.frame, new DetailsFragment(auction.getId()));
+            fragmentTransaction.commit();
+        });
         return convertView;
     }
 }

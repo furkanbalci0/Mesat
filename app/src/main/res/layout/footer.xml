@@ -17,31 +17,9 @@
             android:layout_width="wrap_content"
             android:layout_height="60dp"
             android:background="@color/background_featured_color"
-            app:layout_constraintBottom_toBottomOf="@+id/imageView10"
+            app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent" />
-
-        <ImageView
-            android:id="@+id/imageView10"
-            android:layout_width="80dp"
-            android:layout_height="80dp"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.498"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent"
-            app:srcCompat="@drawable/plus_icon_background" />
-
-        <ImageView
-            android:id="@+id/footer_icon_add"
-            android:layout_width="50dp"
-            android:layout_height="50dp"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toEndOf="@+id/imageView10"
-            app:layout_constraintStart_toStartOf="@+id/imageView10"
-            app:layout_constraintTop_toTopOf="@+id/imageView10"
-            app:layout_constraintVertical_bias="0.533"
-            app:srcCompat="@drawable/plus_icon" />
 
         <ImageView
             android:id="@+id/footer_icon_home"
@@ -57,26 +35,22 @@
             android:id="@+id/footer_icon_search"
             android:layout_width="30dp"
             android:layout_height="35dp"
-            android:layout_marginStart="28dp"
+            android:layout_marginStart="48dp"
             app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toStartOf="@+id/imageView10"
-            app:layout_constraintHorizontal_bias="0.093"
             app:layout_constraintStart_toEndOf="@+id/footer_icon_home"
             app:layout_constraintTop_toTopOf="@+id/view"
-            app:layout_constraintVertical_bias="0.52"
+            app:layout_constraintVertical_bias="0.48"
             app:srcCompat="@drawable/search_icon_opacity" />
 
         <ImageView
             android:id="@+id/footer_icon_support"
             android:layout_width="30dp"
             android:layout_height="35dp"
-            android:layout_marginStart="32dp"
+            android:layout_marginEnd="48dp"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toStartOf="@+id/footer_icon_profile"
-            app:layout_constraintHorizontal_bias="0.0"
-            app:layout_constraintStart_toEndOf="@+id/imageView10"
             app:layout_constraintTop_toTopOf="@+id/view"
-            app:layout_constraintVertical_bias="0.52"
+            app:layout_constraintVertical_bias="0.48"
             app:srcCompat="@drawable/support_icon" />
 
         <ImageView

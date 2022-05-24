@@ -49,15 +49,16 @@ public class MainFragment extends Fragment {
 
                 for (QueryDocumentSnapshot document : task.getResult()) {
                     Auction auction = new Auction(
-                            document.getId(),
+                            document.getString("id"),
                             document.getDate("starting_time"),
-                            document.getLong("owner_id"),
-                            document.getLong("starting_price"),
-                            document.getBoolean("sold"),
+                            document.getLong("owner_id") == null ? 0 : document.getLong("owner_id"),
+                            document.getLong("starting_price") == null ? 0 : document.getLong("starting_price"),
+                            document.getBoolean("sold") == null ? false : document.getBoolean("sold"),
                             document.getString("title"),
                             document.getString("category"),
                             document.getDate("end_time"),
-                            document.getString("showcase_photo"));
+                            document.getString("showcase_photo"),
+                            document.getString("content"));
                     auctions.add(auction);
                 }
 
