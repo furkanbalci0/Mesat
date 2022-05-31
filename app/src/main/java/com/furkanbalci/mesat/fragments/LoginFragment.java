@@ -63,6 +63,7 @@ public class LoginFragment extends Fragment {
                 return;
             }
 
+
             db.collection("users")
                     .limit(1)
                     .whereEqualTo("mail", mail.getText().toString())
@@ -81,10 +82,6 @@ public class LoginFragment extends Fragment {
                                 document.getString("city"),
                                 document.getString("phone"));
 
-                        System.out.println(user.getPassword());
-                        System.out.println(user.getMail());
-                        System.out.println(password.getText().toString());
-                        //API'den gelen istekteki kullanıcının şifresi ile textView
                         //içindeki şifre aynı mı diye kontrol ediyoruz.
                         if (!user.getPassword().contentEquals(password.getText().toString())) {
                             Toast.makeText(viewGroup.getContext(), "Lütfen kullanıcı adınızı veya şifrenizi kontrol ediniz!", Toast.LENGTH_LONG).show();

@@ -15,6 +15,7 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.furkanbalci.mesat.adapter.item.ItemAdapter;
 import com.furkanbalci.mesat.data.LocalDataManager;
+import com.furkanbalci.mesat.fragments.AuctionCreateFragment;
 import com.furkanbalci.mesat.fragments.MainFragment;
 import com.furkanbalci.mesat.models.auction.Auction;
 import com.furkanbalci.mesat.network.Service;
@@ -71,6 +72,12 @@ public class MainActivity extends AppCompatActivity {
 
         fragmentTransaction.replace(R.id.frame, new MainFragment());
         fragmentTransaction.commit();
+
+        //Profile button.
+        this.findViewById(R.id.footer_icon_add).setOnClickListener(v -> {
+            fragmentTransaction.replace(R.id.frame, new AuctionCreateFragment());
+            fragmentTransaction.commit();
+        });
     }
 
 }

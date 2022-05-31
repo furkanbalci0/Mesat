@@ -66,9 +66,9 @@ public class DetailsFragment extends Fragment {
                 System.out.println(uri);
                 ArrayList<String> uriString = new ArrayList<>();
                 uriString.add(uri.toString());
+                fullImageIntent.putExtra(FullScreenImageViewActivity.IMAGE_FULL_SCREEN_CURRENT_POS, 0);
                 fullImageIntent.putExtra(FullScreenImageViewActivity.URI_LIST_DATA, uriString);
 
-                fullImageIntent.putExtra(FullScreenImageViewActivity.IMAGE_FULL_SCREEN_CURRENT_POS, -1);
                 startActivity(fullImageIntent);
             });
 
@@ -98,6 +98,11 @@ public class DetailsFragment extends Fragment {
             });
 
             this.binding.bidButton.setOnClickListener(v -> {
+
+                if (LocalDataManager.getString(container.getContext(), "id", null) == null) {
+                    Snackbar.make(v, "Lütfen giriş yapınız.", Snackbar.LENGTH_SHORT).setBackgroundTint(Color.RED).show();
+                    return;
+                }
 
                 int amount = Integer.parseInt(this.binding.minAmountToBid.getText().toString().replace("₺", ""));
 

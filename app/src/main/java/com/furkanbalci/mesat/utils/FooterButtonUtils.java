@@ -45,14 +45,7 @@ public class FooterButtonUtils {
             fragmentTransaction.commit();
         });
 
-        //Profile button.
-        activity.findViewById(R.id.footer_icon_add).setOnClickListener(v -> {
-            FragmentManager fragmentManager = activity.getSupportFragmentManager();
-            FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
 
-            fragmentTransaction.replace(R.id.frame, new AuctionCreateFragment());
-            fragmentTransaction.commit();
-        });
 
         //Search button.
         activity.findViewById(R.id.footer_icon_search).setOnClickListener(v -> {
