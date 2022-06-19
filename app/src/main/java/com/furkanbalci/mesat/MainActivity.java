@@ -73,11 +73,6 @@ public class MainActivity extends AppCompatActivity {
         fragmentTransaction.replace(R.id.frame, new MainFragment());
         fragmentTransaction.commit();
 
-        //Profile button.
-        this.findViewById(R.id.footer_icon_add).setOnClickListener(v -> {
-            fragmentTransaction.replace(R.id.frame, new AuctionCreateFragment());
-            fragmentTransaction.commit();
-        });
     }
 
 }

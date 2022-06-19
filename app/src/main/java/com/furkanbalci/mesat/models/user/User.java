@@ -19,10 +19,15 @@ public final class User {
     private String mail;
     private final String password;
     private String city;
+    private long credit;
     private final String phone;
     private String profile_photo_id = "1";
 
     public User(String id, String name, String surname, String mail, String password, String city, String phone) {
+        this(id, name, surname, mail, password, city, phone, 0);
+    }
+
+    public User(String id, String name, String surname, String mail, String password, String city, String phone, long credit) {
         this.id = id;
         this.name = name;
         this.surname = surname;
@@ -30,6 +35,15 @@ public final class User {
         this.password = password;
         this.city = city;
         this.phone = phone;
+        this.credit = credit;
+    }
+
+    public void setCredit(long credit) {
+        this.credit = credit;
+    }
+
+    public long getCredit() {
+        return this.credit;
     }
 
     public long getCachingDate() {

@@ -17,10 +17,12 @@ import com.furkanbalci.mesat.MainActivity;
 import com.furkanbalci.mesat.R;
 import com.furkanbalci.mesat.data.LocalDataManager;
 import com.furkanbalci.mesat.models.user.User;
+import com.google.android.material.snackbar.Snackbar;
 import com.google.firebase.firestore.DocumentSnapshot;
 import com.google.firebase.firestore.FirebaseFirestore;
-import com.google.firebase.firestore.QueryDocumentSnapshot;
 import com.google.gson.Gson;
+
+import java.util.List;
 
 public class LoginFragment extends Fragment {
 
@@ -31,7 +33,7 @@ public class LoginFragment extends Fragment {
         ViewGroup viewGroup = (ViewGroup) inflater.inflate(R.layout.fragment_login, container, false);
 
         String id = LocalDataManager.getString(container.getContext(), "id", null);
-        if (id != null){
+        if (id != null) {
             FragmentManager fragmentManager = getParentFragmentManager();
             FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
 
@@ -58,7 +60,7 @@ public class LoginFragment extends Fragment {
             TextView password = viewGroup.findViewById(R.id.editTextTextPassword);
 
             //Boş alan bırakmış mı kontrolü.
-            if (mail.getText() == null || password.getText() == null) {
+            if (mail.getText().toString().equals("") || password.getText().toString().equals("")) {
                 Toast.makeText(viewGroup.getContext(), "Lütfen boş alan bırakmayın!", Toast.LENGTH_LONG).show();
                 return;
             }
@@ -71,8 +73,14 @@ public class LoginFragment extends Fragment {
                     .get()
                     .addOnCompleteListener(task -> {
 
+                        List<DocumentSnapshot> documents = task.getResult().getDocuments();
+                        if (documents.size() == 0) {
+                            Toast.makeText(viewGroup.getContext(), "Lütfen kullanıcı adınızı veya şifrenizi kontrol ediniz!", Toast.LENGTH_LONG).show();
+                            return;
+                        }
+
                         //İlk veriyi çekiyoruz.
-                        DocumentSnapshot document = task.getResult().getDocuments().get(0);
+                        DocumentSnapshot document = documents.get(0);
                         User user = new User(
                                 document.getId(),
                                 document.getString("name"),
@@ -80,7 +88,8 @@ public class LoginFragment extends Fragment {
                                 document.getString("mail"),
                                 document.getString("password"),
                                 document.getString("city"),
-                                document.getString("phone"));
+                                document.getString("phone"),
+                                document.getLong("credit"));
 
                         //içindeki şifre aynı mı diye kontrol ediyoruz.
                         if (!user.getPassword().contentEquals(password.getText().toString())) {
@@ -90,29 +99,25 @@ public class LoginFragment extends Fragment {
 
                         //Kullanıcı giriş yaptığında, bir daha giriş yapmasına gerek kalmasın
                         //diye verilerini önbelleğe kaydediyoruz.
-                        System.out.println("DEBUG: 1 >>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>");
                         LocalDataManager.setString(viewGroup.getContext(), "id", user.getId());
                         LocalDataManager.setString(viewGroup.getContext(), "mail", user.getMail());
                         LocalDataManager.setString(viewGroup.getContext(), "name", user.getName());
                         LocalDataManager.setLong(viewGroup.getContext(), "last_login", System.currentTimeMillis());
                         LocalDataManager.setString(viewGroup.getContext(), "object", new Gson().toJson(user));
 
-                        System.out.println("DEBUG: 2 >>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>");
-                        System.out.println(LocalDataManager.getString(viewGroup.getContext(), "id", "-1"));
-                        System.out.println(LocalDataManager.getLong(viewGroup.getContext(), "last_login", -1));
+                        LocalDataManager.put(viewGroup.getContext(), "user_object", user);
 
                         //Send message.
-                        Toast.makeText(viewGroup.getContext(), "Başarıyla giriş yaptınız!", Toast.LENGTH_LONG).show();
+                        Snackbar.make(viewGroup, "Başarıyla giriş yaptınız!", Snackbar.LENGTH_LONG).show();
 
                         //Giriş yaptığında ana ekrana yönlendiriyoruz ve bu ekranı bitiriyoruz.
                         Intent intent = new Intent(viewGroup.getContext(), MainActivity.class);
                         viewGroup.getContext().startActivity(intent);
                     }).addOnFailureListener(e -> {
-                Toast.makeText(viewGroup.getContext(), "Lütfen kullanıcı adınızı veya şifrenizi kontrol ediniz!", Toast.LENGTH_LONG).show();
-            });
+                        Toast.makeText(viewGroup.getContext(), "Lütfen kullanıcı adınızı veya şifrenizi kontrol ediniz!", Toast.LENGTH_LONG).show();
+                    });
 
         });
-
 
 
         return viewGroup;

@@ -17,6 +17,7 @@
             app:layout_constraintBottom_toTopOf="@+id/cardView2"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintVertical_bias="0.0"
             tools:ignore="SpeakableTextPresentCheck">
 
             <LinearLayout
@@ -46,64 +47,19 @@
                     android:layout_height="wrap_content">
 
                     <TextView
-                        android:id="@+id/current_bidder_amount_text3"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_marginBottom="-15dp"
-                        android:fontFamily="sans-serif-light"
-                        android:text="0₺"
-                        android:textAlignment="textStart"
-                        android:textColor="#99048C12"
-                        android:textSize="16sp"
-                        app:layout_constraintBottom_toTopOf="@+id/current_bidder_amount_text2"
-                        app:layout_constraintEnd_toEndOf="parent"
-                        app:layout_constraintHorizontal_bias="0.0"
-                        app:layout_constraintStart_toStartOf="@+id/current_bidder_amount_text2" />
-
-                    <TextView
                         android:id="@+id/current_bidder_text3"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:layout_marginBottom="-15dp"
                         android:fontFamily="sans-serif-light"
-                        android:text="Bilinmiyor"
+                        android:text="Son Teklif"
                         android:textAlignment="textEnd"
-                        android:textColor="#B8B8B8"
-                        android:textSize="16sp"
-                        app:layout_constraintBottom_toTopOf="@+id/current_bidder_text2"
-                        app:layout_constraintEnd_toEndOf="@+id/current_bidder_text2"
-                        app:layout_constraintHorizontal_bias="1.0"
-                        app:layout_constraintStart_toStartOf="parent" />
-
-                    <TextView
-                        android:id="@+id/current_bidder_text2"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_marginBottom="-20dp"
-                        android:fontFamily="sans-serif-light"
-                        android:text="Bilinmiyor"
-                        android:textAlignment="textEnd"
-                        android:textColor="#757575"
-                        android:textSize="22sp"
+                        android:textColor="#595959"
+                        android:textSize="20sp"
+                        android:textStyle="bold"
                         app:layout_constraintBottom_toTopOf="@+id/current_bidder_text"
-                        app:layout_constraintEnd_toEndOf="@+id/current_bidder_text"
-                        app:layout_constraintHorizontal_bias="1.0"
-                        app:layout_constraintStart_toStartOf="parent" />
-
-                    <TextView
-                        android:id="@+id/current_bidder_amount_text2"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_marginBottom="-20dp"
-                        android:fontFamily="sans-serif-light"
-                        android:text="0₺"
-                        android:textAlignment="textStart"
-                        android:textColor="#CC4E9716"
-                        android:textSize="22sp"
-                        app:layout_constraintBottom_toTopOf="@+id/current_bidder_amount_text"
                         app:layout_constraintEnd_toEndOf="parent"
-                        app:layout_constraintHorizontal_bias="0.0"
-                        app:layout_constraintStart_toStartOf="@+id/current_bidder_amount_text" />
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toTopOf="parent" />
 
                     <TextView
                         android:id="@+id/current_bidder_amount_text"

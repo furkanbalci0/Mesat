@@ -4,7 +4,6 @@ import android.annotation.SuppressLint;
 import android.graphics.Color;
 import android.os.Bundle;
 
-import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentTransaction;
@@ -20,17 +19,10 @@ import android.widget.Toast;
 import com.furkanbalci.mesat.R;
 import com.furkanbalci.mesat.data.LocalDataManager;
 import com.furkanbalci.mesat.models.user.User;
-import com.furkanbalci.mesat.network.Service;
-import com.furkanbalci.mesat.network.user.UserService;
 import com.furkanbalci.mesat.utils.GlideUtil;
-import com.google.android.gms.tasks.OnFailureListener;
-import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.android.material.snackbar.Snackbar;
 import com.google.firebase.firestore.FirebaseFirestore;
 import com.google.gson.Gson;
-
-import retrofit2.Call;
-import retrofit2.Callback;
 
 public class ProfileFragment extends Fragment {
 
@@ -87,8 +79,17 @@ public class ProfileFragment extends Fragment {
 
         EditText passwordText = viewGroup.findViewById(R.id.profile_text_password);
 
-        Button button = viewGroup.findViewById(R.id.profile_button_update);
-        button.setOnClickListener(v -> {
+        Button creditButton = viewGroup.findViewById(R.id.profile_button_credit);
+        creditButton.setOnClickListener(v -> {
+            FragmentManager fragmentManager = getParentFragmentManager();
+            FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
+
+            fragmentTransaction.replace(R.id.frame, new CreditFragment());
+            fragmentTransaction.commit();
+        });
+
+        Button updateButton = viewGroup.findViewById(R.id.profile_button_update);
+        updateButton.setOnClickListener(v -> {
 
             String pass = passwordText.getText().toString();
             if (pass.isEmpty()){
